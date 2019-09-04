@@ -1,0 +1,48 @@
+box:
+  id: golang
+  ports:
+    - "5000"
+
+# 开发阶段，修改保存代码可以实时看到效果
+dev:
+  steps:
+    - script:
+        name: go get
+        code: go get
+      
+    - internal/watch:
+        code: |
+          go build -o app ./...
+          ./app
+        reload: true
+
+# 构建阶段
+build:
+  steps:
+    - script:
+        name: go get
+        code: go get
+
+    - wercker/golint
+
+    # 测试
+    - script:
+        name: go test
+        code: go test ./...
+
+    # 静态编译
+    - script:
+        name: go build
+        code: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+
+# 部署阶段   
+deploy:
+  steps:
+    # 推送 scratch 镜像到 dockerhub
+    - internal/docker-scratch-push:
+      username: $USERNAME
+      password: $PASSWORD
+      tag: $WERCKER_GIT_COMMIT
+      cmd: ./app
+      ports: "5000"
+      repository: $USERNAME/my-golang-image
