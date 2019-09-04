@@ -53,6 +53,6 @@ and then refresh your browser pointing to `http://localhost:5000/cities.json` to
 Sign up for Wercker: http://www.wercker.com
 
 Learn more at: 
-http://devcenter.wercker.com
-https://coreos.com/blog/building-minimal-containers-with-quay-kubernetes-wercker.html
-https://blog.codeship.com/building-minimal-docker-containers-for-go-applications/
+* http://devcenter.wercker.com
+* https://coreos.com/blog/building-minimal-containers-with-quay-kubernetes-wercker.html
+* https://blog.codeship.com/building-minimal-docker-containers-for-go-applications/
