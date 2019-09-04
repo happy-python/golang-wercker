@@ -39,10 +39,11 @@ build:
 deploy:
   steps:
     # 推送 scratch 镜像到 dockerhub
+    # $USERNAME、$PASSWORD 需要在 Wercker 中进行环境变量的设置
     - internal/docker-scratch-push:
       username: $USERNAME
       password: $PASSWORD
       tag: $WERCKER_GIT_COMMIT
       cmd: ./app
       ports: "5000"
-      repository: $USERNAME/my-golang-image
+      repository: $USERNAME/golang-wercker
